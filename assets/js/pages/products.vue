@@ -44,9 +44,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <span class="p-3">
-                        {{ legend }} <!-- Render reactive data inside the template -->
-                    </span>
+                    <legend-component title="TODO PUT LEGEND HERE"/>
                 </div>
             </div>
         </div>
@@ -54,9 +52,13 @@
 </template>
 
 <script>
+import LegendComponent from '../components/legend.vue'; // Import the Legend component
 // export default defines the Vue component options
 export default {
     name: 'Products', // the name of the component, used for debugging and recursive components (it helps Vue identify the component in the component tree)
+    components: {
+        LegendComponent, // Register the imported Legend component so it can be used in the template
+    },
     // data() returns reactive state for the component
     data() { // the short way is data() { ... } // we moved that to products.vue!
         return {

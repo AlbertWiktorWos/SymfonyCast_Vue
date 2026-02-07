@@ -1,5 +1,7 @@
 # The Delightful World of Vue
 ## [07.02.2025]
+- Props: Passing Info into a Child Component
+- Creating a Child Component
 - data - passing data to a component
 - CSS: Styling a Component
 - Single File Component
