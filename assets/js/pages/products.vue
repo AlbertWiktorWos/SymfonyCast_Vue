@@ -44,7 +44,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <legend-component title="TODO PUT LEGEND HERE"/>
+                    <legend-component :title="legend" /> <!-- Pass dynamic data as prop using v-bind  (shortcut of v-bind:title)-->
+                    <!-- simple way to pass string  <legend-component title="TODO PUT LEGEND HERE"/>-->
                 </div>
             </div>
         </div>

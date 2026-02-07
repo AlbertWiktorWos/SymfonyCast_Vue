@@ -11,7 +11,11 @@ export default {
     // Define a prop named 'title' to receive data from the parent component
     // props: ['title'], //its a string, but we can also specify the type and default value like this:
     props: {
-        title: { type: String, default: 'Shipping takes 10-12 weeks, and products probably won\'t work' },
+        title: {
+            type: String,
+            default: 'Shipping takes 10-12 weeks.',
+            required: true, // this prop must always be provided
+        },
     },
 };
 </script>
