@@ -1,5 +1,6 @@
 # The Delightful World of Vue
 ## [07.02.2025]
+- v-if, v-show and Conditional Classes
 - Reactivity
 - Magic "this" & its Properties
 - v-on & methods: User Interaction

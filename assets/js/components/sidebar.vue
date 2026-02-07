@@ -3,30 +3,37 @@
     <!-- modular CSS + static classes -->
     <!-- :style= dynamic width based on collapsed -->
     <div
-        :class="[$style.sidebar, 'p-3', 'mb-5']"
-        :style="{ width: collapsed ? '70px' : 'auto' }"
+        :class="{
+            [$style.component]: true,
+            [$style.collapsed]: collapsed,
+            'p-3': true,
+            'mb-5': true
+        }"
     >
-        <h5 class="text-center">
-            Categories
-        </h5>
+        <!-- v-if completely removes elements from DOM if collapsed is true -->
+        <div v-if="!collapsed">
+            <h5 class="text-center">
+                Categories
+            </h5>
 
-        <ul class="nav flex-column mb4">
-            <!-- key="index" is an unique key for Vue internal tracking -->
-            <li
-                v-for="(category, index) in categories"
-                :key="index"
-                class="nav-item"
-            >
-                <a
-                    :href="category.link"
-                    class="nav-link"
+            <ul class="nav flex-column mb4">
+                <!-- key="index" is an unique key for Vue internal tracking -->
+                <li
+                    v-for="(category, index) in categories"
+                    :key="index"
+                    class="nav-item"
                 >
-                    {{ category.name }} <!-- dynamic content -->
-                </a>
-            </li>
-        </ul>
+                    <a
+                        :href="category.link"
+                        class="nav-link"
+                    >
+                        {{ category.name }} <!-- dynamic content -->
+                    </a>
+                </li>
+            </ul>
 
-        <hr>
+            <hr>
+        </div>
 
         <!-- dynamic text using v-text directive -->
         <div class="d-flex justify-content-end">
@@ -66,8 +73,12 @@ export default {
 @import '~styles/components/light-component'; // earlier we importet that by ../../scss/components/light-component
 
 /* Sidebar styles using SCSS mixin */
-.sidebar {
+.component {
   @include light-component;
+
+  &.collapsed { // & is a reference to the parent selector, so this means .component.collapsed
+    width: 70px; // narrow width when collapsed
+  }
 
   ul {
     li {
