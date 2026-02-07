@@ -3,10 +3,15 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-            <aside class="col-xs-12 col-3">
-                <sidebar />
+            <aside :class="asideClass">
+                <!--    @toggle-collapsed="toggleSidebarCollapsed" Shorthand for v-on -->
+                <!--  v-on:toggle-collapsed - Listen for custom event -->
+                <sidebar
+                    :collapsed="sidebarCollapsed"
+                    @toggle-collapsed="toggleSidebarCollapsed"
+                />
             </aside>
-            <div class="col-xs-12 col-9">
+            <div :class="contentClass">
                 <catalog />
             </div>
         </div>
@@ -32,6 +37,30 @@ export default {
     //     // Arrow function shorthand returning the data object
     //     legend: 'Shipping takes 10-13 weeks, and products probably won\'t work',
     //   }),
+    data() {
+        return {
+            sidebarCollapsed: false, // state to track if the sidebar is collapsed
+        };
+    },
+    computed: {
+        asideClass() {
+            // Determines sidebar width based on collapse state
+            return this.sidebarCollapsed
+                ? 'aside-collapsed'
+                : 'col-xs-12 col-3';
+        },
+        contentClass() {
+            // Main content grows when sidebar is collapsed
+            return this.sidebarCollapsed
+                ? 'col-xs-12 col-11'
+                : 'col-xs-12 col-9';
+        },
+    },
+    methods: {
+        toggleSidebarCollapsed() {
+            this.sidebarCollapsed = !this.sidebarCollapsed; // toggle the collapsed state
+        },
+    },
 
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
     <!-- sidebar content -->
     <!-- computed property is used directly in template -->
-    <div :class="componentClass">
+    <div :class="[$style.component, 'p-3', 'mb-5']">
         <!-- Using CSS Modules, we access the scoped class with $style.sidebar -->
         <!-- modular CSS + static classes -->
         <!-- :style= dynamic width based on collapsed -->
@@ -41,10 +41,11 @@
         </div>
 
         <!-- dynamic text using v-text directive -->
+        <!-- @click="$emit(.. Emit event directly from template. Earilier we use @click="toggleCollapsed" - method from methods -->
         <div class="d-flex justify-content-end">
             <button
                 class="btn btn-secondary btn-sm"
-                @click="toggleCollapsed"
+                @click="$emit('toggle-collapsed')"
                 v-text="collapsed ? '>>' : '<< Collapse'"
             />  <!-- @click shorthand for v-on:click -->
         </div>
@@ -54,38 +55,31 @@
 <script>
 export default {
     name: 'Sidebar',
+    props: { // props are how we pass data from parent to child components. They are reactive and can be used in the template and logic of the component.
+        collapsed: {
+            type: Boolean,
+            required: true, // ensure prop is passed
+        },
+    },
     data() {
         return {
-            collapsed: false, // sidebar starts expanded
             categories: [
                 { name: 'Dot Matrix Printers', link: '#' },
                 { name: 'Iomega Zip Drives', link: '#' },
             ],
         };
     },
-    computed: {
-    /**
-     * Computes the component classes depending on collapsed state
-     * computed property calculates an array of classes, conditionally adding collapsed
-     * @return string[]
-     */
-        componentClass() {
-            const classes = [this.$style.component, 'p-3', 'mb-5']; // always needed classes
-            if (this.collapsed) {
-                classes.push(this.$style.collapsed); // add collapsed class conditionally
-            }
-            return classes;
-        },
-    },
     created() { // created lifecycle hook runs after the component is created but before it is mounted to the DOM. It's a good place to perform setup tasks or log the component instance for debugging.
         console.log(this); // inspect the Vue 3 Proxy instance
     },
-    methods: {
-        toggleCollapsed() {
-            this.collapsed = !this.collapsed; // toggle state
-            console.log(this.componentClass); // logs array of classes as a property
-        },
-    },
+    // we don't need whole methods because we only emit event (now in button)
+    // methods: {
+    //     toggleCollapsed() {
+    //         // this.collapsed = !this.collapsed; // toggle state
+    //         // console.log(this.componentClass); // logs array of classes as a property
+    //         this.$emit('toggle-collapsed', this.collapsed); // emit event to parent with new state
+    //     },
+    // },
 
 };
 </script>
@@ -97,9 +91,6 @@ export default {
 .component {
   @include light-component;
 
-  &.collapsed { // & is a reference to the parent selector, so this means .component.collapsed
-    width: 70px; // narrow width when collapsed
-  }
   ul {
     li {
       a:hover {
