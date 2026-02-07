@@ -1,5 +1,7 @@
 # The Delightful World of Vue
-## [05.02.2025]
+## [07.02.2025]
+- data - passing data to a component
+- CSS: Styling a Component
 - Single File Component
 - Vue Instance & Dynamic Data
 - Installing Vue, Webpack & Eslint
