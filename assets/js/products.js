@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 
-import App from './pages/products.vue'; // Import the main Vue component for the products page
+import App from '@/pages/products.vue'; // Import the main Vue component for the products page
 
 createApp(App).mount('#app'); // Create and mount the Vue application to the DOM element with id "app"
 /*

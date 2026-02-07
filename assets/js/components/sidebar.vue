@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style lang="scss" module> // lang="scss" allows us to use SCSS here!. // module is for CSS Modules, which scopes styles to this component only. It prevents styles from leaking out and affecting other parts of the application. This is optional but can be useful for larger applications to avoid style conflicts.
-@import '../../scss/components/light-component';
+@import '~styles/components/light-component'; // earlier we importet that by ../../scss/components/light-component
 
 /* Sidebar styles using SCSS mixin */
 .sidebar {

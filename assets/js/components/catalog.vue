@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import LegendComponent from './legend.vue';
+import LegendComponent from '@/components/legend.vue'; // its the same as import LegendComponent from '../components/legend.vue'; // because @ is an alias for src/assets/js, so it goes up to src/assets/js/components/legend.vue
 
 export default {
     name: 'Catalog',

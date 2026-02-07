@@ -15,8 +15,8 @@
 
 <script>
 // export default defines the Vue component options
-import Sidebar from '../components/sidebar.vue';
-import Catalog from '../components/catalog.vue';
+import Sidebar from '@/components/sidebar.vue'; //@ in this case is ..
+import Catalog from '@/components/catalog.vue';
 
 export default {
     name: 'Products', // the name of the component, used for debugging and recursive components (it helps Vue identify the component in the component tree)
