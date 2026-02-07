@@ -8,8 +8,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-6 mb-2 pb-2">
-                TODO - load some products!
+            <div
+                v-for="product in products"
+                :key="product['@id']"
+                class="col-xs-12 col-6 mb-2 pb-2"
+            >
+                {{ product.name }}
             </div>
         </div>
         <div class="row">
@@ -21,6 +25,7 @@
 
 <script>
 import LegendComponent from '@/components/legend.vue'; // its the same as import LegendComponent from '../components/legend.vue'; // because @ is an alias for src/assets/js, so it goes up to src/assets/js/components/legend.vue
+import axios from 'axios'; // Import Axios HTTP client
 
 export default {
     name: 'Catalog',
@@ -29,7 +34,19 @@ export default {
         return {
             // Reactive data used inside the template
             legend: 'Shipping takes 10-12 weeks, and products probably won\'t work',
+            products: [], // Reactive array for products
         };
+    },
+    async mounted() {
+    // Make GET request to API Platform endpoint
+    //     axios.get('/api/products').then((response) => {
+    //         // Log full Axios response (headers, status, data, etc.)
+    //         console.log(response);
+    //     });
+        // another way to do it is using async/await syntax, which is more modern and often easier to read:
+        const response = await axios.get('/api/products'); // but we need to make the mounted method async to use await!
+        // .log(response); // Log full Axios response (headers, status, data, etc.)
+        this.products = response.data['hydra:member'];
     },
 };
 </script>
