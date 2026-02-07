@@ -1,5 +1,6 @@
 # The Delightful World of Vue
 ## [07.02.2025]
+- Computed Properties
 - v-if, v-show and Conditional Classes
 - Reactivity
 - Magic "this" & its Properties
