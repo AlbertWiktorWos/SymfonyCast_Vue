@@ -4,7 +4,9 @@
     <div class="container-fluid">
         <div class="row">
             <aside class="col-xs-12 col-3">
-                <div class="sidebar p-3 mb-5">
+                <!-- Using CSS Modules, we access the scoped class with $style.sidebar -->
+                <!-- modular CSS + static classes -->
+                <div :class="[$style.sidebar, 'p-3', 'mb-5']">
                     <h5 class="text-center">
                         Categories
                     </h5>
@@ -78,7 +80,7 @@ export default {
 };
 </script>
 
-<style lang="scss"> // lang="scss" allows us to use SCSS here!.
+<style lang="scss" module> // lang="scss" allows us to use SCSS here!. // module is for CSS Modules, which scopes styles to this component only. It prevents styles from leaking out and affecting other parts of the application. This is optional but can be useful for larger applications to avoid style conflicts.
 @import '../../scss/components/light-component';
 
 /* Sidebar styles using SCSS mixin */

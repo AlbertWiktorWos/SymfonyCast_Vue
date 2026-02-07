@@ -1,5 +1,6 @@
 # The Delightful World of Vue
 ## [07.02.2025]
+- Modular CSS
 - v-bind: Dynamic Attributes
 - Props: Passing Info into a Child Component
 - Creating a Child Component

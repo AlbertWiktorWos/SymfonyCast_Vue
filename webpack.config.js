@@ -67,6 +67,15 @@ Encore
         version: 3,
     })
 
+    .configureCssLoader((config) => {
+        if (!Encore.isProduction() && config.modules) {
+            config.modules.localIdentName = '[name]_[local]_[hash:base64:5]';
+            // [name] – file name of Vue component (e.g. MyButton)
+            // [local] – CSS classname in component (e.g. .my-button)
+            // [hash:base64:5] – random hash to avoid name collisions between different components
+        }
+    });
+
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
 
