@@ -1,5 +1,6 @@
 # The Delightful World of Vue
 ## [07.02.2025]
+- Looping with v-for
 - Aliases
 - Organizing into more Components
 - Modular CSS
