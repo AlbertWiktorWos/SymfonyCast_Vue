@@ -1,0 +1,20 @@
+import { compile, createApp } from 'vue';
+
+const template = '<h1>Hello {{ firstName }}! Is this cooler?</h1>';
+
+// old way to mount vue was adding key el: '#app', // Mount Vue inside <div id="app">
+createApp({
+    data: function () { // the short way is data() { ... }
+        return {
+            firstName: 'Ryan',
+        };
+    },
+    // template: '<h1>Hello {{ firstName }}! Is this cooler?</h1>',
+
+    render() { // or render: function() { ... }  // render() overrides Vue's internal rendering
+        // turns a template string into a render function
+        return compile(template)(this.$.ctx); // Compile the template and render it with the component's context (this.$.ctx)
+    },
+
+
+}).mount('#app'); // Mount the app to the DOM element with id "app"
