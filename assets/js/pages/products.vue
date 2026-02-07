@@ -4,71 +4,27 @@
     <div class="container-fluid">
         <div class="row">
             <aside class="col-xs-12 col-3">
-                <!-- Using CSS Modules, we access the scoped class with $style.sidebar -->
-                <!-- modular CSS + static classes -->
-                <div :class="[$style.sidebar, 'p-3', 'mb-5']">
-                    <h5 class="text-center">
-                        Categories
-                    </h5>
-                    <ul class="nav flex-column mb4">
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="/"
-                            >All Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="#"
-                            >Category A</a>
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="#"
-                            >Category B</a>
-                        </li>
-                    </ul>
-                </div>
+                <sidebar />
             </aside>
             <div class="col-xs-12 col-9">
-                <div class="row">
-                    <div class="col-12">
-                        <h1>
-                            Products
-                        </h1>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-6 mb-2 pb-2">
-                        TODO - load some products!
-                    </div>
-                </div>
-                <div class="row">
-                    <legend-component :title="legend" /> <!-- Pass dynamic data as prop using v-bind  (shortcut of v-bind:title)-->
-                    <!-- simple way to pass string  <legend-component title=".. PUT LEGEND HERE"/>-->
-                </div>
+                <catalog />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import LegendComponent from '../components/legend.vue'; // Import the Legend component
 // export default defines the Vue component options
+import Sidebar from '../components/sidebar.vue';
+import Catalog from '../components/catalog.vue';
+
 export default {
     name: 'Products', // the name of the component, used for debugging and recursive components (it helps Vue identify the component in the component tree)
     components: {
-        LegendComponent, // Register the imported Legend component so it can be used in the template
+        Catalog,
+        Sidebar, // register the Sidebar component so it can be used in this template. This allows us to use <sidebar-component> in our template to render the sidebar.
     },
     // data() returns reactive state for the component
-    data() { // the short way is data() { ... } // we moved that to products.vue!
-        return {
-            // Reactive data used inside the template
-            legend: 'Shipping takes 10-12 weeks, and products probably won\'t work',
-        };
-    },
     // Alternatively, we can use an arrow function for data, which is a shorthand syntax.
     // However, be cautious with arrow functions in Vue components, as they do not have their own `this` context.
     // In this case, since we are not using `this` inside the data function, it is safe to use an arrow function.
@@ -81,19 +37,5 @@ export default {
 </script>
 
 <style lang="scss" module> // lang="scss" allows us to use SCSS here!. // module is for CSS Modules, which scopes styles to this component only. It prevents styles from leaking out and affecting other parts of the application. This is optional but can be useful for larger applications to avoid style conflicts.
-@import '../../scss/components/light-component';
-
-/* Sidebar styles using SCSS mixin */
-.sidebar {
-  @include light-component;
-
-  ul {
-    li {
-      a:hover {
-        background: $blue-component-link-hover;
-      }
-    }
-  }
-}
 
 </style>

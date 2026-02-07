@@ -91,4 +91,9 @@ Encore
     //.addEntry('admin', './assets/js/admin.js')
 ;
 
+// disable CSS extraction in development mode to enable hot module replacement (HMR) for CSS files
+if (!Encore.isProduction()) {
+    Encore.disableCssExtraction();
+}
+
 module.exports = Encore.getWebpackConfig();

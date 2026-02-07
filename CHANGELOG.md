@@ -1,5 +1,6 @@
 # The Delightful World of Vue
 ## [07.02.2025]
+- Organizing into more Components
 - Modular CSS
 - v-bind: Dynamic Attributes
 - Props: Passing Info into a Child Component
