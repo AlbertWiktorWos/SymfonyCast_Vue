@@ -1,5 +1,6 @@
 # The Delightful World of Vue
 ## [05.02.2025]
+- Single File Component
 - Vue Instance & Dynamic Data
 - Installing Vue, Webpack & Eslint
 ## [05.02.2025]
