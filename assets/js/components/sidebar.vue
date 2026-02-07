@@ -51,6 +51,9 @@ export default {
             ],
         };
     },
+    created() { // created lifecycle hook runs after the component is created but before it is mounted to the DOM. It's a good place to perform setup tasks or log the component instance for debugging.
+        console.log(this); // inspect the Vue 3 Proxy instance
+    },
     methods: {
         toggleCollapsed() {
             this.collapsed = !this.collapsed; // toggle state

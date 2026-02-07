@@ -1,5 +1,7 @@
 # The Delightful World of Vue
 ## [07.02.2025]
+- Reactivity
+- Magic "this" & its Properties
 - v-on & methods: User Interaction
 - Looping with v-for
 - Aliases
