@@ -12,8 +12,10 @@ run in command line next commands:
 * `docker-compose exec php /bin/bash`
 * `symfony check:requirements`
 * `composer install`
-* `npm run watch` to compile assets whenever changes are made
-* `npm run dev` to compile assets once
+* `npm install` or `yarn install`
+for build assets run:
+* `yarn watch` or `npm run watch` to compile assets whenever changes are made
+* `yarn run dev` or `npm run dev` to compile assets once
 * Open: http://localhost:8080/
 
 # Better performance

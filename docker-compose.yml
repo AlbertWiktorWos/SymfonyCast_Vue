@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   database:
-    container_name: api_database
+    container_name: vue_database
     image: mysql:${DB_VERSION}
     command: --default-authentication-plugin=mysql_native_password
     environment:
@@ -16,7 +16,7 @@ services:
       - db_data:/var/lib/mysql
 
   php:
-    container_name: api_php
+    container_name: vue_php
     build:
       context: .
     ports:
@@ -38,7 +38,7 @@ services:
       - database
 
   nginx:
-    container_name: api_nginx
+    container_name: vue_nginx
     image: nginx:stable-alpine
     ports:
       - '8080:80'
