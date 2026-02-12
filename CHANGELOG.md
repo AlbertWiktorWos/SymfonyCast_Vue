@@ -1,5 +1,6 @@
 # The Delightful World of Vue
 ## [12.02.2025]
+- Dynamic Categories via Ajax
 - Loading Component (view)
 - Product Details & Smart vs Dumb Components
 - Product Listing Components

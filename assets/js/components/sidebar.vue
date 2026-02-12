@@ -22,14 +22,15 @@
             </h5>
 
             <ul class="nav flex-column mb4">
-                <!-- key="index" is an unique key for Vue internal tracking -->
+                <!-- we use key="index" earlier - is an unique key for Vue internal tracking -->
+                <!-- but now as we use api we have @id as unique key for Vue's virtual DOM diffing -->
                 <li
-                    v-for="(category, index) in categories"
-                    :key="index"
+                    v-for="(category) in categories"
+                    :key="category['@id']"
                     class="nav-item"
                 >
                     <a
-                        :href="category.link"
+                        :href="`/category/${category.id}`"
                         class="nav-link"
                     >
                         {{ category.name }} <!-- dynamic content -->
@@ -53,6 +54,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     name: 'Sidebar',
     props: { // props are how we pass data from parent to child components. They are reactive and can be used in the template and logic of the component.
@@ -63,14 +66,16 @@ export default {
     },
     data() {
         return {
-            categories: [
-                { name: 'Dot Matrix Printers', link: '#' },
-                { name: 'Iomega Zip Drives', link: '#' },
-            ],
+            categories: [],
         };
     },
     created() { // created lifecycle hook runs after the component is created but before it is mounted to the DOM. It's a good place to perform setup tasks or log the component instance for debugging.
         console.log(this); // inspect the Vue 3 Proxy instance
+    },
+    async onMounted() {
+        const response = await axios.get('/api/categories'); // but we need to make the mounted method async to use await!
+        // .log(response); // Log full Axios response (headers, status, data, etc.)
+        this.categories = response.data['hydra:member'];
     },
     // we don't need whole methods because we only emit event (now in button)
     // methods: {
