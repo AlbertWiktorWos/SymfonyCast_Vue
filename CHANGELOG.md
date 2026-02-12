@@ -1,5 +1,7 @@
 # The Delightful World of Vue
 ## [12.02.2025]
+- Hoisting Data Up (categories data)
+- Passing Props vs Fetching Directly (title component)
 - Faking Ajax calls: Reading Synchronously (for categories)
 - Skipping Ajax: Sending JSON Straight to Vue (for categories)
 - Ajax Services

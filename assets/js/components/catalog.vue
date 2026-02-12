@@ -2,9 +2,10 @@
     <div>
         <div class="row">
             <div class="col-12">
-                <h1>
-                    Products
-                </h1>
+                <title-component
+                    :current-category-id="currentCategoryId"
+                    :categories="categories"
+                />
             </div>
         </div>
 
@@ -23,16 +24,21 @@
 <script>
 import LegendComponent from '@/components/legend.vue'; // its the same as import LegendComponent from '../components/legend.vue'; // because @ is an alias for src/assets/js, so it goes up to src/assets/js/components/legend.vue
 import ProductList from '@/components/product-list';
+import TitleComponent from '@/components/title.vue';
 import { fetchProducts } from '@/services/products-service'; // we import whole directory because it will automatically look for index.vue file
 
 export default {
     name: 'Catalog',
-    components: { ProductList, LegendComponent },
+    components: { ProductList, LegendComponent, TitleComponent },
     props: {
         currentCategoryId: {
             type: String,
             default: null,
         },
+      categories: {
+        type: Array,
+        required: true, // ensure prop is passed
+      },
     },
     data() { // the short way is data() { ... } // we moved that to products.vue!
         return {

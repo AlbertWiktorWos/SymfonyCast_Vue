@@ -88,11 +88,10 @@ export default {
             type: String,
             default: null,
         },
-    },
-    data() {
-        return {
-            categories: [],
-        };
+        categories: {
+            type: Array,
+            required: true, // ensure prop is passed
+        },
     },
     computed: {
         loading() {
@@ -101,10 +100,6 @@ export default {
     },
     created() { // created lifecycle hook runs after the component is created but before it is mounted to the DOM. It's a good place to perform setup tasks or log the component instance for debugging.
         console.log(this); // inspect the Vue 3 Proxy instance
-    },
-    async mounted() {
-        const response = await fetchCategories(); // using service function to fetch categories, we can also use axios directly here for simplicity and to demonstrate async/await in the mounted hook.
-        this.categories = response.data['hydra:member'];
     },
     // we don't need whole methods because we only emit event (now in button)
     // methods: {

@@ -9,12 +9,16 @@
                 <sidebar
                     :collapsed="sidebarCollapsed"
                     :current-category-id="currentCategoryId"
+                    :categories="categories"
                     @toggle-collapsed="toggleSidebarCollapsed"
                 />
             </aside>
             <div :class="contentClass">
                 <!-- Pass current category as prop to catalog -->
-                <catalog :current-category-id="currentCategoryId" />
+                <catalog
+                    :current-category-id="currentCategoryId"
+                    :categories="categories"
+                />
             </div>
         </div>
     </div>
@@ -25,6 +29,7 @@
 import Sidebar from '@/components/sidebar.vue'; //@ in this case is ..
 import Catalog from '@/components/catalog.vue';
 import { getCurrentCategoryId } from '@/services/page-context';
+import { fetchCategories } from '@/services/categories-service';
 
 export default {
     name: 'Products', // the name of the component, used for debugging and recursive components (it helps Vue identify the component in the component tree)
@@ -43,6 +48,7 @@ export default {
     data() {
         return {
             sidebarCollapsed: false, // state to track if the sidebar is collapsed
+            categories: [],
         };
     },
     computed: {
@@ -62,6 +68,11 @@ export default {
         // Extract category ID from current URL
             return getCurrentCategoryId();
         },
+    },
+
+    async mounted() {
+        const response = await fetchCategories(); // using service function to fetch categories, we can also use axios directly here for simplicity and to demonstrate async/await in the mounted hook.
+        this.categories = response.data['hydra:member'];
     },
     methods: {
         toggleSidebarCollapsed() {
