@@ -41,6 +41,9 @@ export default {
         // another way to do it is using async/await syntax, which is more modern and often easier to read:
         const response = await axios.get('/api/products'); // but we need to make the mounted method async to use await!
         // .log(response); // Log full Axios response (headers, status, data, etc.)
+
+        await new Promise((r) => setTimeout(r, 2000)); // Simulate loading delay (2 seconds)
+
         this.products = response.data['hydra:member'];
     },
 };
