@@ -1,5 +1,7 @@
 # The Delightful World of Vue
 ## [12.02.2025]
+- Reading Server Data & :global Classes
+- Passing data From the Server to Vue
 - Dynamic Categories via Ajax
 - Loading Component (view)
 - Product Details & Smart vs Dumb Components

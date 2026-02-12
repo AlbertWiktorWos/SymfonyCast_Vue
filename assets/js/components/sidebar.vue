@@ -24,6 +24,20 @@
             <ul class="nav flex-column mb4">
                 <!-- we use key="index" earlier - is an unique key for Vue internal tracking -->
                 <!-- but now as we use api we have @id as unique key for Vue's virtual DOM diffing -->
+                <li class="nav-item">
+                    <!-- 'nav-link': true, always apply base class-->
+                    <!-- 'selected': currentCategoryId === null highlight homepage-->
+                    <a
+                        :class="{
+                            'nav-link': true,
+                            [$style.selected]: currentCategoryId === null
+                        }"
+                        href="/"
+                    >
+                        All Products
+                    </a>
+                </li>
+
                 <li
                     v-for="(category) in categories"
                     :key="category['@id']"
@@ -31,7 +45,10 @@
                 >
                     <a
                         :href="`/category/${category.id}`"
-                        class="nav-link"
+                        :class="{
+                            'nav-link': true,
+                            'selected': currentCategoryId === category['@id']
+                        }"
                     >
                         {{ category.name }} <!-- dynamic content -->
                     </a>
@@ -69,10 +86,16 @@ export default {
             categories: [],
         };
     },
+    computed: {
+        currentCategoryId() {
+            // Extract category ID from current URL
+            return window.currentCategoryId;
+        },
+    },
     created() { // created lifecycle hook runs after the component is created but before it is mounted to the DOM. It's a good place to perform setup tasks or log the component instance for debugging.
         console.log(this); // inspect the Vue 3 Proxy instance
     },
-    async onMounted() {
+    async mounted() {
         const response = await axios.get('/api/categories'); // but we need to make the mounted method async to use await!
         // .log(response); // Log full Axios response (headers, status, data, etc.)
         this.categories = response.data['hydra:member'];
@@ -93,7 +116,7 @@ export default {
 @import '~styles/components/light-component'; // earlier we importet that by ../../scss/components/light-component
 
 /* Sidebar styles using SCSS mixin */
-.component {
+.component :global {
   @include light-component;
 
   ul {
@@ -102,7 +125,11 @@ export default {
         background: $blue-component-link-hover;
       }
     }
+    li a.selected {
+      background: $light-component-border;
+    }
   }
+
 }
 
 </style>

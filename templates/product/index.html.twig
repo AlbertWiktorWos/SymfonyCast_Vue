@@ -8,6 +8,17 @@
 {# block for javascripts links #}
 {% block javascripts %}
     {{ parent() }}
+
+    <script>
+        {% if currentCategoryId is defined %}
+        // set current category IRI from controller
+        window.currentCategoryId = '{{ currentCategoryId|e('js') }}';
+        {% else %}
+        // no category means homepage (all products)
+        window.currentCategoryId = null;
+        {% endif %}
+    </script>
+
     {{ encore_entry_script_tags('products') }}
 {% endblock %}
 
