@@ -15,15 +15,25 @@ class SerializerExtension extends AbstractExtension
         $this->serializer = $serializer;
     }
 
+    /**
+     * Define custom Twig filters.
+     * @return TwigFilter[]
+     */
     public function getFilters(): array
     {
         return [
-            new TwigFilter('jsonld', [$this, 'serializeToJsonLd'], ['is_safe' => ['html']]),
+            new TwigFilter('jsonld', [$this, 'serializeToJsonLd'], ['is_safe' => ['html']]), // define jsonld filter
         ];
     }
 
+    /**
+     * Serialize data to JSON-LD format using Symfony's Serializer.
+     * @param $data
+     * @return string
+     */
     public function serializeToJsonLd($data): string
     {
-        return $this->serializer->serialize($data, 'jsonld');
+        return $this->serializer->serialize($data, 'jsonld'); // convert data to jsonld format
     }
+
 }

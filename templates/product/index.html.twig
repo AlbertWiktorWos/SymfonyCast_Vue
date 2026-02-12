@@ -17,6 +17,9 @@
         // no category means homepage (all products)
         window.currentCategoryId = null;
         {% endif %}
+
+        window.categories = {{ categories|jsonld }}; // expose categories to Vue
+
     </script>
 
     {{ encore_entry_script_tags('products') }}
