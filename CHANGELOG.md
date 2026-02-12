@@ -1,4 +1,7 @@
 # The Delightful World of Vue
+## [12.02.2025]
+- Product Details & Smart vs Dumb Components
+- Product Listing Components
 ## [07.02.2025]
 - The await Keyword
 - Ajax with Axios (yarn add axios --dev)

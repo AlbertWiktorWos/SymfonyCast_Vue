@@ -7,15 +7,9 @@
                 </h1>
             </div>
         </div>
-        <div class="row">
-            <div
-                v-for="product in products"
-                :key="product['@id']"
-                class="col-xs-12 col-6 mb-2 pb-2"
-            >
-                {{ product.name }}
-            </div>
-        </div>
+
+        <product-list :products="products" /> <!-- Pass products array as prop to ProductList component -->
+
         <div class="row">
             <legend-component :title="legend" /> <!-- Pass dynamic data as prop using v-bind  (shortcut of v-bind:title)-->
             <!-- simple way to pass string  <legend-component title=".. PUT LEGEND HERE"/>-->
@@ -26,10 +20,11 @@
 <script>
 import LegendComponent from '@/components/legend.vue'; // its the same as import LegendComponent from '../components/legend.vue'; // because @ is an alias for src/assets/js, so it goes up to src/assets/js/components/legend.vue
 import axios from 'axios'; // Import Axios HTTP client
+import ProductList from '@/components/product-list'; // we import whole directory because it will automatically look for index.vue file
 
 export default {
     name: 'Catalog',
-    components: { LegendComponent },
+    components: { ProductList, LegendComponent },
     data() { // the short way is data() { ... } // we moved that to products.vue!
         return {
             // Reactive data used inside the template
