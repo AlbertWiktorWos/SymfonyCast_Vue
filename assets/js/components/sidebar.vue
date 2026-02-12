@@ -80,17 +80,15 @@ export default {
             type: Boolean,
             required: true, // ensure prop is passed
         },
+        currentCategoryId: {
+            type: String,
+            default: null,
+        },
     },
     data() {
         return {
             categories: [],
         };
-    },
-    computed: {
-        currentCategoryId() {
-            // Extract category ID from current URL
-            return window.currentCategoryId;
-        },
     },
     created() { // created lifecycle hook runs after the component is created but before it is mounted to the DOM. It's a good place to perform setup tasks or log the component instance for debugging.
         console.log(this); // inspect the Vue 3 Proxy instance
