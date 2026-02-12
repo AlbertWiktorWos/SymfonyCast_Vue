@@ -1,5 +1,7 @@
 # The Delightful World of Vue
 ## [12.02.2025]
+- Smarter Loading: Ajax status as State
+- Filtering the Products
 - Page Context "Service"
 - Reading Server Data & :global Classes
 - Passing data From the Server to Vue

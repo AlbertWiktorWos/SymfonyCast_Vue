@@ -8,7 +8,10 @@
             </div>
         </div>
 
-        <product-list :products="products" /> <!-- Pass products array as prop to ProductList component -->
+        <product-list
+            :products="products"
+            :loading="loading"
+        /> <!-- Pass products array as prop to ProductList component -->
 
         <div class="row">
             <legend-component :title="legend" /> <!-- Pass dynamic data as prop using v-bind  (shortcut of v-bind:title)-->
@@ -25,25 +28,44 @@ import ProductList from '@/components/product-list'; // we import whole director
 export default {
     name: 'Catalog',
     components: { ProductList, LegendComponent },
+    props: {
+        currentCategoryId: {
+            type: String,
+            default: null,
+        },
+    },
     data() { // the short way is data() { ... } // we moved that to products.vue!
         return {
             // Reactive data used inside the template
             legend: 'Shipping takes 10-12 weeks, and products probably won\'t work',
             products: [], // Reactive array for products
+            loading: false, // tracks loading status // added flag for tracking Ajax call
         };
     },
     async mounted() {
-    // Make GET request to API Platform endpoint
-    //     axios.get('/api/products').then((response) => {
-    //         // Log full Axios response (headers, status, data, etc.)
-    //         console.log(response);
-    //     });
-        // another way to do it is using async/await syntax, which is more modern and often easier to read:
-        const response = await axios.get('/api/products'); // but we need to make the mounted method async to use await!
-        // .log(response); // Log full Axios response (headers, status, data, etc.)
+        this.loading = true;
+        const params = {};
+        // If a category ID is provided, fetch products for that category
+        if (this.currentCategoryId) {
+            params.category = this.currentCategoryId;
+        }
+
+        let response = null;
+        try {
+            response = await axios.get('/api/products', { // but we need to make the mounted method async to use await!
+                params, // Pass query parameters to filter products by category if currentCategoryId is set
+            // its short for { params: params } because of ES6 object property shorthand syntax, where if the property name and variable name are the same, we can just write it once.
+            });
+            // .log(response); // Log full Axios response (headers, status, data, etc.)
+        } catch (error) {
+            console.error('Error fetching products:', error);
+            this.loading = false; // Ensure loading state is reset on error
+            // Exit early if there's an error
+            return;
+        }
 
         await new Promise((r) => setTimeout(r, 2000)); // Simulate loading delay (2 seconds)
-
+        this.loading = false;
         this.products = response.data['hydra:member'];
     },
 };

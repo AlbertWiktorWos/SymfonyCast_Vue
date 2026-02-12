@@ -21,6 +21,8 @@
                 Categories
             </h5>
 
+            <loading v-show="loading" /> <!-- loader visible when loading categories -->
+
             <ul class="nav flex-column mb4">
                 <!-- we use key="index" earlier - is an unique key for Vue internal tracking -->
                 <!-- but now as we use api we have @id as unique key for Vue's virtual DOM diffing -->
@@ -72,9 +74,11 @@
 
 <script>
 import axios from 'axios';
+import Loading from '@/components/loading.vue';
 
 export default {
     name: 'Sidebar',
+    components: { Loading },
     props: { // props are how we pass data from parent to child components. They are reactive and can be used in the template and logic of the component.
         collapsed: {
             type: Boolean,
@@ -89,6 +93,11 @@ export default {
         return {
             categories: [],
         };
+    },
+    computed: {
+        loading() {
+            return this.categories.length === 0; // consider loading if categories array is empty
+        },
     },
     created() { // created lifecycle hook runs after the component is created but before it is mounted to the DOM. It's a good place to perform setup tasks or log the component instance for debugging.
         console.log(this); // inspect the Vue 3 Proxy instance

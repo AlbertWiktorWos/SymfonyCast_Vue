@@ -2,14 +2,17 @@
     <div class="row">
         <div class="col-12">
             <div class="mt-4 text-center">
-                <Loading v-show="products.length === 0" /> <!-- Show while loading -->
+                <Loading v-show="loading" /> <!-- Show while loading -->
+                <h5 v-show="!loading && products.length === 0">
+                    No products found yet. :(
+                </h5>
             </div>
         </div>
 
         <!-- Loop through products array and render ProductCard for each item -->
         <ProductCard
             v-for="product in products"
-            v-show="products.length > 0"
+            v-show="!loading"
             :key="product['@id']"
             :product="product"
         />  <!-- v-show= Show only when data exists -->
@@ -33,6 +36,10 @@ export default {
         products: {
             type: Array, // Expect array of product objects
             required: true, // Enforce prop presence
+        },
+        loading: {
+            type: Boolean,
+            required: true,
         },
     },
 };

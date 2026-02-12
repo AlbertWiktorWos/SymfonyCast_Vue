@@ -13,7 +13,8 @@
                 />
             </aside>
             <div :class="contentClass">
-                <catalog />
+                <!-- Pass current category as prop to catalog -->
+                <catalog :current-category-id="currentCategoryId" />
             </div>
         </div>
     </div>
