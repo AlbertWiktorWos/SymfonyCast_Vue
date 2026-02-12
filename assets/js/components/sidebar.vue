@@ -73,8 +73,8 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Loading from '@/components/loading.vue';
+import { fetchCategories } from '@/services/categories-service'; // we can also import fetchCategories from services/categories-service.js, but we will use axios directly here for simplicity and to demonstrate async/await in the mounted hook.
 
 export default {
     name: 'Sidebar',
@@ -103,8 +103,7 @@ export default {
         console.log(this); // inspect the Vue 3 Proxy instance
     },
     async mounted() {
-        const response = await axios.get('/api/categories'); // but we need to make the mounted method async to use await!
-        // .log(response); // Log full Axios response (headers, status, data, etc.)
+        const response = await fetchCategories(); // using service function to fetch categories, we can also use axios directly here for simplicity and to demonstrate async/await in the mounted hook.
         this.categories = response.data['hydra:member'];
     },
     // we don't need whole methods because we only emit event (now in button)

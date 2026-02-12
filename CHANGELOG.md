@@ -1,5 +1,6 @@
 # The Delightful World of Vue
 ## [12.02.2025]
+- Ajax Services
 - Smarter Loading: Ajax status as State
 - Filtering the Products
 - Page Context "Service"

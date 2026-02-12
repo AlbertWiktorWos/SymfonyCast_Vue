@@ -22,8 +22,8 @@
 
 <script>
 import LegendComponent from '@/components/legend.vue'; // its the same as import LegendComponent from '../components/legend.vue'; // because @ is an alias for src/assets/js, so it goes up to src/assets/js/components/legend.vue
-import axios from 'axios'; // Import Axios HTTP client
-import ProductList from '@/components/product-list'; // we import whole directory because it will automatically look for index.vue file
+import ProductList from '@/components/product-list';
+import { fetchProducts } from '@/services/products-service'; // we import whole directory because it will automatically look for index.vue file
 
 export default {
     name: 'Catalog',
@@ -44,18 +44,10 @@ export default {
     },
     async mounted() {
         this.loading = true;
-        const params = {};
-        // If a category ID is provided, fetch products for that category
-        if (this.currentCategoryId) {
-            params.category = this.currentCategoryId;
-        }
-
         let response = null;
+        // If a category ID is provided, fetch products for that category
         try {
-            response = await axios.get('/api/products', { // but we need to make the mounted method async to use await!
-                params, // Pass query parameters to filter products by category if currentCategoryId is set
-            // its short for { params: params } because of ES6 object property shorthand syntax, where if the property name and variable name are the same, we can just write it once.
-            });
+            response = await fetchProducts(this.currentCategoryId); // Use the service function to fetch products with optional category filter
             // .log(response); // Log full Axios response (headers, status, data, etc.)
         } catch (error) {
             console.error('Error fetching products:', error);
