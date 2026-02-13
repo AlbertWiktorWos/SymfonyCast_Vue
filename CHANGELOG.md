@@ -1,5 +1,7 @@
 # The Delightful World of Vue
 ## [13.02.2025]
+- Adding an x symbol to our Search Bar (clear searchbar text)
+- Business Logic Helpers
 - Debouncing: Data can Hold Anything ( for search input )
 - Async Computed Properties ( filtering products at backend )
 - Filtering Products (searching only at frontend data)

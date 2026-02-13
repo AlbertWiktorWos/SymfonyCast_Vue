@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import formatPrice from '@/helpers/format-price';
+// Import helper function
 export default {
     name: 'ProductCard',
     props: {
@@ -40,13 +42,9 @@ export default {
         },
     },
     computed: {
-    /**
-     * Returns a formatted price for the product
-     * @returns {string}
-     */
         price() {
-            return (this.product.price / 100)
-                .toLocaleString('en-US', { minimumFractionDigits: 2 });
+            // Use helper to format product price
+            return formatPrice(this.product.price);
         },
     },
 
