@@ -20,11 +20,23 @@ export default {
     data() {
         return {
             searchTerm: '', // Holds current input value
+            searchTimeout: null, // Stores current timeout id
         };
     },
     methods: {
         onInput() {
-            this.$emit('search-products', { term: this.searchTerm });
+            // If a timeout already exists, cancel it
+            if (this.searchTimeout) {
+                clearTimeout(this.searchTimeout);
+            }
+
+            this.searchTimeout = setTimeout(() => {
+                // Emit custom event after delay
+                this.$emit('search-products', { term: this.searchTerm });
+
+                // Reset timeout id after execution
+                this.searchTimeout = null;
+            }, 200);
             // Emit custom event with payload
         },
     },

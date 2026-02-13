@@ -1,5 +1,7 @@
 # The Delightful World of Vue
 ## [13.02.2025]
+- Debouncing: Data can Hold Anything ( for search input )
+- Async Computed Properties ( filtering products at backend )
 - Filtering Products (searching only at frontend data)
 - Pass Data in a Custom Event & Internal Data  (search-bar component)
 - The Formidable v-model (search-bar component)
