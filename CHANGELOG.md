@@ -1,5 +1,6 @@
 # The Delightful World of Vue
 ## [13.02.2025]
+- Adding Watcher (change category)
 - Adding an x symbol to our Search Bar (clear searchbar text)
 - Business Logic Helpers
 - Debouncing: Data can Hold Anything ( for search input )

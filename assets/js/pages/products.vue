@@ -49,6 +49,7 @@ export default {
         return {
             sidebarCollapsed: false, // state to track if the sidebar is collapsed
             categories: [],
+            currentCategoryId: getCurrentCategoryId(), // get current category ID from page context service, this allows us to determine which category is currently active based on the URL or other context information.
         };
     },
     computed: {
@@ -64,12 +65,7 @@ export default {
                 ? 'col-xs-12 col-11'
                 : 'col-xs-12 col-9';
         },
-        currentCategoryId() {
-        // Extract category ID from current URL
-            return getCurrentCategoryId();
-        },
     },
-
     async mounted() {
         const response = await fetchCategories(); // using service function to fetch categories, we can also use axios directly here for simplicity and to demonstrate async/await in the mounted hook.
         this.categories = response.data['hydra:member'];
@@ -79,6 +75,7 @@ export default {
             this.sidebarCollapsed = !this.sidebarCollapsed; // toggle the collapsed state
         },
     },
+
 
 };
 </script>
