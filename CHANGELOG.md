@@ -1,4 +1,8 @@
 # The Delightful World of Vue
+## [13.02.2025]
+- Filtering Products (searching only at frontend data)
+- Pass Data in a Custom Event & Internal Data  (search-bar component)
+- The Formidable v-model (search-bar component)
 ## [12.02.2025]
 - Hoisting Data Up (categories data)
 - Passing Props vs Fetching Directly (title component)
